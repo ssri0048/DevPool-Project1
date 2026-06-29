@@ -9,7 +9,13 @@
 
 `ใช้สำหรับนำเสนอภายในองค์กรเท่านั้น · For internal organizational presentation only`
 
-</div>
+---
+
+## 🌐 เว็บไซต์ที่เผยแพร่ · Live Demo
+
+เว็บไซต์นี้ถูก Deploy ผ่าน **GitHub Pages** สามารถเข้าถึงได้ที่:
+
+👉 **https://ssri0048.github.io/DevPool-Project1/**
 
 ---
 
