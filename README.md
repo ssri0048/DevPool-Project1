@@ -1,4 +1,4 @@
-<div align="center">
+<div align="left">
 
 # 🚀 DevPool 2569 — Self-Introduction Web Page
 
@@ -60,7 +60,7 @@ DevPool/
 
 ---
 
-<div align="center">
+<div align="left">
 
 **DevPool 2569 · การไฟฟ้าส่วนภูมิภาค (PEA)**
 
