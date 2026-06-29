@@ -1,101 +1,425 @@
 <!DOCTYPE html>
 <html lang="th">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Devpool Project 1</title>
 
   <!-- ฟอนต์: Orbitron หัวข้อ / Rajdhani เนื้อหา / Share Tech Mono ตัวเลข -->
-  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@400;600;700&family=Orbitron:wght@700;900&display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@400;600;700&family=Orbitron:wght@700;900&display=swap"
+    rel="stylesheet" />
 
   <style>
     /* ===== ตัวแปรสี global ===== */
     :root {
-      --cyan:#00d4ff;               /* สีหลัก: หัวข้อ/ไฮไลต์/ขอบเน้น */
-      --cyan-dim:#0099bb;           /* ฟ้าหม่น: ข้อความรอง/ไอคอน */
-      --cyan-dark:#002a38;          /* ฟ้าเข้ม: เงา/พื้นในกล่อง */
-      --glow:rgba(0,212,255,.18);   /* แสงฟ้าจาง: gradient ทับกล่อง */
-      --glow-md:rgba(0,212,255,.35);
-      --bg:#010c11;                 /* พื้นหลังทั้งหน้า */
-      --bg2:#040f16;
-      --panel:rgba(2,18,28,.90);    /* พื้นกล่อง */
-      --border:rgba(0,212,255,.22); /* ขอบกล่องปกติ */
-      --border-hi:rgba(0,212,255,.55);/* ขอบเน้น/ไอคอน */
-      --text:#c6edf7;               /* ตัวอักษรหลัก */
-      --text-dim:rgba(198,237,247,.45);/* ตัวอักษรจาง: label */
-      --white:#e8f8ff;              /* เด่นสุด: ชื่อ/หัวข้อใหญ่ */
+      --cyan: #00d4ff;
+      /* สีหลัก: หัวข้อ/ไฮไลต์/ขอบเน้น */
+      --cyan-dim: #0099bb;
+      /* ฟ้าหม่น: ข้อความรอง/ไอคอน */
+      --cyan-dark: #002a38;
+      /* ฟ้าเข้ม: เงา/พื้นในกล่อง */
+      --glow: rgba(0, 212, 255, .18);
+      /* แสงฟ้าจาง: gradient ทับกล่อง */
+      --glow-md: rgba(0, 212, 255, .35);
+      --bg: #010c11;
+      /* พื้นหลังทั้งหน้า */
+      --bg2: #040f16;
+      --panel: rgba(2, 18, 28, .90);
+      /* พื้นกล่อง */
+      --border: rgba(0, 212, 255, .22);
+      /* ขอบกล่องปกติ */
+      --border-hi: rgba(0, 212, 255, .55);
+      /* ขอบเน้น/ไอคอน */
+      --text: #c6edf7;
+      /* ตัวอักษรหลัก */
+      --text-dim: rgba(198, 237, 247, .45);
+      /* ตัวอักษรจาง: label */
+      --white: #e8f8ff;
+      /* เด่นสุด: ชื่อ/หัวข้อใหญ่ */
     }
 
     /* โหมดสว่าง (ปุ่มธีม toggle .light บน body) */
     body.light {
-      --bg:#e8f4f8; --bg2:#d0eaf4; --panel:rgba(220,242,252,.95);
-      --border:rgba(0,140,180,.30); --border-hi:rgba(0,140,180,.70);
-      --text:#0a3040; --text-dim:rgba(10,48,64,.50); --white:#021820;
-      --cyan:#007aaa; --cyan-dim:#005577;
+      --bg: #e8f4f8;
+      --bg2: #d0eaf4;
+      --panel: rgba(220, 242, 252, .95);
+      --border: rgba(0, 140, 180, .30);
+      --border-hi: rgba(0, 140, 180, .70);
+      --text: #0a3040;
+      --text-dim: rgba(10, 48, 64, .50);
+      --white: #021820;
+      --cyan: #007aaa;
+      --cyan-dim: #005577;
     }
 
-    *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; } /* reset */
-    body { font-family:'Rajdhani',sans-serif; background:var(--bg); color:var(--text);
-      min-height:100vh; overflow-x:hidden; transition:background .4s,color .4s; }
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* reset */
+    body {
+      font-family: 'Rajdhani', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+      transition: background .4s, color .4s;
+    }
 
     /* พื้นหลัง HUD */
-    .grid-bg { position:fixed; inset:0; z-index:0; pointer-events:none;
-      background-image:linear-gradient(rgba(0,212,255,.04) 1px,transparent 1px),
-                       linear-gradient(90deg,rgba(0,212,255,.04) 1px,transparent 1px);
-      background-size:40px 40px; }
+    .grid-bg {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background-image: linear-gradient(rgba(0, 212, 255, .04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 212, 255, .04) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
 
-    .wrap { position:relative; z-index:2; max-width:1080px; margin:0 auto; padding:36px 20px 48px; }
+    .wrap {
+      position: relative;
+      z-index: 2;
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 36px 20px 48px;
+    }
 
     /* topbar */
-    .topbar { display:flex; align-items:center; gap:16px; flex-wrap:wrap; justify-content:space-between;
-      border-bottom:1px solid var(--border); padding-bottom:10px; margin-bottom:28px; }
-    .topbar-brand { font-family:'Orbitron',monospace; font-size:11px; font-weight:700; color:var(--cyan); letter-spacing:.12em; }
-    .topbar-clock { font-family:'Share Tech Mono',monospace; font-size:11px; color:var(--text-dim); display:flex; gap:8px; }
-    .topbar-sep { opacity:.4; }
-    .theme-switch-wrap { display:flex; align-items:center; gap:8px; cursor:pointer; user-select:none;
-      font-family:'Share Tech Mono',monospace; font-size:9px; color:var(--text-dim); }
-    .mode-lbl.active { color:var(--cyan); }
-    .ts-track { width:44px; height:22px; border:1px solid var(--border-hi); background:rgba(0,212,255,.06); position:relative; flex-shrink:0; }
-    .ts-thumb { position:absolute; top:3px; left:3px; width:14px; height:14px; background:var(--cyan); box-shadow:0 0 8px var(--cyan); transition:transform .3s; }
-    body.light .ts-thumb { transform:translateX(22px); }
+    .topbar {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 10px;
+      margin-bottom: 28px;
+    }
+
+    .topbar-brand {
+      font-family: 'Orbitron', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--cyan);
+      letter-spacing: .12em;
+    }
+
+    .topbar-clock {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 11px;
+      color: var(--text-dim);
+      display: flex;
+      gap: 8px;
+    }
+
+    .topbar-sep {
+      opacity: .4;
+    }
+
+    .theme-switch-wrap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      user-select: none;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 9px;
+      color: var(--text-dim);
+    }
+
+    .mode-lbl.active {
+      color: var(--cyan);
+    }
+
+    .ts-track {
+      width: 44px;
+      height: 22px;
+      border: 1px solid var(--border-hi);
+      background: rgba(0, 212, 255, .06);
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .ts-thumb {
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      width: 14px;
+      height: 14px;
+      background: var(--cyan);
+      box-shadow: 0 0 8px var(--cyan);
+      transition: transform .3s;
+    }
+
+    body.light .ts-thumb {
+      transform: translateX(22px);
+    }
 
     /* hero: รูปซ้าย 220px / ขวายืด */
-    .hero { display:grid; grid-template-columns:220px 1fr; gap:24px; margin-bottom:22px; align-items:stretch; }
-    .avatar-panel { background:var(--panel); border:1px solid var(--border); overflow:hidden; }
-    .avatar-frame { aspect-ratio:3/4; background:linear-gradient(180deg,#031a27,#010c11);
-      display:flex; align-items:center; justify-content:center; color:var(--text-dim); font-family:'Share Tech Mono',monospace; font-size:10px; } /* << ใส่ <img> ที่นี่ */
-    .avatar-meta { padding:10px 14px; border-top:1px solid var(--border); font-family:'Share Tech Mono',monospace; font-size:9px; color:var(--text-dim); }
-    .id-box { background:var(--panel); border:1px solid var(--border); padding:20px 22px; margin-bottom:16px; }
-    .qstats { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--border); }
-    .qs { background:var(--panel); text-align:center; padding:14px 6px; font-family:'Share Tech Mono',monospace; font-size:9px; color:var(--text-dim); }
+    .hero {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 24px;
+      margin-bottom: 22px;
+      align-items: stretch;
+    }
+
+    .avatar-panel {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      overflow: hidden;
+    }
+
+    .avatar-frame {
+      width: 220px;
+      aspect-ratio: 3 / 4;
+
+      background: linear-gradient(180deg, #031a27, #010c11);
+
+      overflow: hidden;
+
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    body.light .avatar-frame {
+      background: linear-gradient(180deg, #c0dcea, #aad0e0);
+    }
+
+    /* reticle = วงแหวนเป้าเล็ง 3 วง เต้นจังหวะ (HUD ซ้อนหลังรูป) */
+    .reticle {
+      position: absolute; inset: 0; pointer-events: none;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .ring {
+      position: absolute; border: 1px solid rgba(0, 212, 255, .18);
+      border-radius: 50%; animation: pulse 3s ease-in-out infinite;
+    }
+    .ring:nth-child(1) { width: 70px;  height: 70px; }
+    .ring:nth-child(2) { width: 120px; height: 120px; animation-delay: .6s; }
+    .ring:nth-child(3) { width: 170px; height: 170px; animation-delay: 1.2s; }
+    @keyframes pulse {
+      0%, 100% { opacity: .12; transform: scale(1); }
+      50%      { opacity: .45; transform: scale(1.04); }
+    }
+    .cross { position: absolute; width: 44px; height: 44px; }
+    .cross::before, .cross::after { content: ''; position: absolute; background: rgba(0, 212, 255, .50); }
+    .cross::before { width: 1px; height: 100%; left: 50%; top: 0; }
+    .cross::after  { width: 100%; height: 1px; top: 50%; left: 0; }
+
+    .avatar-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;        /* รูปเต็มกรอบทั้งภาพ ไม่บิดเบี้ยว */
+      object-position: top;
+      display: block;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* placeholder รูปคน (CSS) — โผล่เมื่อรูปจริงโหลดไม่ได้ (onerror) */
+    .fig { width: 100px; height: 160px; position: relative; z-index: 2; }
+    .fig-head {
+      width: 46px; height: 46px; border-radius: 50%;
+      background: linear-gradient(135deg, #0a3040, #0d4560);
+      border: 2px solid var(--cyan-dim); margin: 0 auto 5px;
+      box-shadow: 0 0 18px rgba(0, 212, 255, .22); position: relative;
+    }
+    .fig-head::after { content: ''; position: absolute; inset: 7px; border-radius: 50%;
+      border: 1px solid rgba(0, 212, 255, .25); }
+    .fig-body {
+      width: 72px; height: 100px; margin: 0 auto;
+      background: linear-gradient(180deg, #0a3040, #020c10);
+      border: 1px solid var(--cyan-dark);
+      clip-path: polygon(12% 0%, 88% 0%, 100% 8%, 100% 100%, 0 100%, 0 8%);
+      position: relative; box-shadow: 0 0 24px rgba(0, 212, 255, .08) inset;
+    }
+    .fig-body::before { content: ''; position: absolute; top: 12px; left: 50%; transform: translateX(-50%);
+      width: 26px; height: 2px; background: var(--cyan); box-shadow: 0 0 8px var(--cyan); }
+
+    .avatar-meta {
+      padding: 10px 14px;
+      border-top: 1px solid var(--border);
+    }
+    .avatar-id {
+      font-family: 'Share Tech Mono', monospace; font-size: 9px;
+      color: var(--text-dim); letter-spacing: .15em; margin-bottom: 3px;
+    }
+    .avatar-class {
+      font-family: 'Orbitron', monospace; font-size: 10px; color: var(--cyan);
+    }
+
+    .id-box {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      padding: 20px 22px;
+      margin-bottom: 16px;
+    }
+
+    .qstats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+    }
+
+    .qs {
+      background: var(--panel);
+      text-align: center;
+      padding: 14px 6px;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 9px;
+      color: var(--text-dim);
+    }
 
     /* PANEL มาตรฐาน */
-    .panel { background:var(--panel); border:1px solid var(--border); position:relative; overflow:hidden; display:flex; flex-direction:column; margin-bottom:18px; }
-    .ph { padding:9px 14px; border-bottom:1px solid var(--border); background:rgba(0,212,255,.04); display:flex; align-items:center; gap:9px; }
-    .ph-icon { width:18px; height:18px; border:1px solid var(--border-hi); flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:9px; color:var(--cyan); }
-    .ph-title { font-family:'Share Tech Mono',monospace; font-size:10px; color:var(--cyan); letter-spacing:.18em; }
-    .ph-num { margin-left:auto; font-family:'Share Tech Mono',monospace; font-size:8px; color:var(--text-dim); }
-    .pb { padding:14px; flex:1; color:var(--text-dim); font-size:13px; }
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 18px;
+    }
+
+    .ph {
+      padding: 9px 14px;
+      border-bottom: 1px solid var(--border);
+      background: rgba(0, 212, 255, .04);
+      display: flex;
+      align-items: center;
+      gap: 9px;
+    }
+
+    .ph-icon {
+      width: 18px;
+      height: 18px;
+      border: 1px solid var(--border-hi);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 9px;
+      color: var(--cyan);
+    }
+
+    .ph-title {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 10px;
+      color: var(--cyan);
+      letter-spacing: .18em;
+    }
+
+    .ph-num {
+      margin-left: auto;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 8px;
+      color: var(--text-dim);
+    }
+
+    .pb {
+      padding: 14px;
+      flex: 1;
+      color: var(--text-dim);
+      font-size: 13px;
+    }
 
     /* main = 2 คอลัมน์ / bottom = 3 คอลัมน์ */
-    .main-grid   { display:grid; grid-template-columns:1fr 1fr;     gap:18px; margin-bottom:18px; align-items:stretch; }
-    .bottom-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:18px; margin-bottom:18px; align-items:stretch; }
+    .main-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      margin-bottom: 18px;
+      align-items: stretch;
+    }
+
+    .bottom-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 18px;
+      margin-bottom: 18px;
+      align-items: stretch;
+    }
 
     /* closing quote: กึ่งกลาง ไม่มีกรอบ */
-    .closing-quote { margin:48px auto 32px; text-align:center; max-width:680px; padding:0 20px; }
-    .cq-mark { font-family:'Orbitron',monospace; font-size:72px; line-height:1; color:var(--cyan); opacity:.12; margin-bottom:-24px; }
-    .cq-text { font-size:18px; color:var(--text-dim); line-height:1.75; font-style:italic; min-height:52px; }
-    .cq-author { font-family:'Share Tech Mono',monospace; font-size:11px; color:var(--cyan); letter-spacing:.18em; margin-top:14px; opacity:.7; }
-    .cq-btn { display:inline-flex; align-items:center; gap:6px; background:transparent; border:1px solid var(--border);
-      color:var(--text-dim); font-family:'Share Tech Mono',monospace; font-size:10px; padding:6px 14px; cursor:pointer; margin-top:16px; }
+    .closing-quote {
+      margin: 48px auto 32px;
+      text-align: center;
+      max-width: 680px;
+      padding: 0 20px;
+    }
+
+    .cq-mark {
+      font-family: 'Orbitron', monospace;
+      font-size: 72px;
+      line-height: 1;
+      color: var(--cyan);
+      opacity: .12;
+      margin-bottom: -24px;
+    }
+
+    .cq-text {
+      font-size: 18px;
+      color: var(--text-dim);
+      line-height: 1.75;
+      font-style: italic;
+      min-height: 52px;
+    }
+
+    .cq-author {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 11px;
+      color: var(--cyan);
+      letter-spacing: .18em;
+      margin-top: 14px;
+      opacity: .7;
+    }
+
+    .cq-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-dim);
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 10px;
+      padding: 6px 14px;
+      cursor: pointer;
+      margin-top: 16px;
+    }
 
     /* footer */
-    .footer { margin-top:28px; padding-top:14px; border-top:1px solid var(--border);
-      display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px; font-size:13px; color:var(--text-dim); }
+    .footer {
+      margin-top: 28px;
+      padding-top: 14px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--text-dim);
+    }
 
     /* responsive: จอแคบ → ทุกกริดเหลือคอลัมน์เดียว */
     @media (max-width:780px) {
-      .hero, .main-grid, .bottom-grid { grid-template-columns:1fr; }
+
+      .hero,
+      .main-grid,
+      .bottom-grid {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
@@ -107,42 +431,102 @@
     <div class="topbar">
       <span class="topbar-brand"> DEVPOOL 2569 · SASIWIPHA'S PROFILE</span>
       <span class="topbar-clock"><span>--</span><span class="topbar-sep">·</span><span>--:--:--</span></span>
-      <div class="theme-switch-wrap"><span class="mode-lbl active">Dark</span><div class="ts-track"><div class="ts-thumb"></div></div><span class="mode-lbl">Light</span></div>
+      <div class="theme-switch-wrap"><span class="mode-lbl active">Dark</span>
+        <div class="ts-track">
+          <div class="ts-thumb"></div>
+        </div><span class="mode-lbl">Light</span>
+      </div>
     </div>
 
     <!-- HERO: avatar(220px) + identity -->
     <div class="hero">
       <div class="avatar-panel">
-        <div class="avatar-frame">[ Profile Pic ]</div> <!-- TODO: <img src="assets/pic1.jpg"> -->
-        <div class="avatar-meta">UNIT ID // SUBJECT-001</div>
+        <div class="avatar-frame">
+          <div class="reticle">
+            <div class="ring"></div><div class="ring"></div><div class="ring"></div>
+            <div class="cross"></div>
+          </div>
+          <img id="avatarImg" src="assets/pic1.png" alt="Profile Picture"
+               onerror="this.style.display='none'; document.getElementById('avatarFig').style.display='block';">
+          <div id="avatarFig" class="fig" style="display:none;">
+            <div class="fig-head"></div>
+            <div class="fig-body"></div>
+          </div>
+        </div>
+        <div class="avatar-meta">
+          <div class="avatar-id"> SASIWIPHA · 508263 </div>
+          <div class="avatar-class"> PROGRAMMER LEVEL 7 </div>
+        </div>
       </div>
       <div style="display:flex;flex-direction:column;">
         <div class="id-box">// TODO: ชื่อ · ตำแหน่ง/สังกัด กฟภ. · bio + ปุ่มดูเพิ่ม</div>
-        <div class="qstats"><div class="qs">[stat1]</div><div class="qs">[stat2]</div><div class="qs">[stat3]</div></div>
+        <div class="qstats">
+          <div class="qs">[stat1]</div>
+          <div class="qs">[stat2]</div>
+          <div class="qs">[stat3]</div>
+        </div>
       </div>
     </div>
 
     <!-- WHY DEVPOOL (เต็มแถว) -->
     <div class="panel">
-      <div class="ph"><div class="ph-icon">✦</div><span class="ph-title">// WHY DEVPOOL 2569</span></div>
+      <div class="ph">
+        <div class="ph-icon">✦</div><span class="ph-title">// WHY DEVPOOL 2569</span>
+      </div>
       <div class="pb">// TODO: เหตุผลที่อยากเข้า DevPool</div>
     </div>
 
     <!-- MAIN GRID: 2 คอลัมน์ × 4 กล่อง -->
     <div class="main-grid">
-      <div class="panel"><div class="ph"><div class="ph-icon">◈</div><span class="ph-title">CORE ATTRIBUTE ANALYSIS</span><span class="ph-num">[01/04]</span></div><div class="pb">// TODO: แถบพลัง 6 อัน</div></div>
-      <div class="panel"><div class="ph"><div class="ph-icon">◎</div><span class="ph-title">Capability Radar</span></div><div class="pb">// TODO: เรดาร์ SVG</div></div>
-      <div class="panel"><div class="ph"><div class="ph-icon">⏱</div><span class="ph-title">Experience</span></div><div class="pb">// TODO: ไทม์ไลน์ + ปุ่มอ่านเพิ่ม</div></div>
-      <div class="panel"><div class="ph"><div class="ph-icon">🎓</div><span class="ph-title">Education</span></div><div class="pb">// TODO: การศึกษา + Capstone</div></div>
+      <div class="panel">
+        <div class="ph">
+          <div class="ph-icon">◈</div><span class="ph-title">CORE ATTRIBUTE ANALYSIS</span><span
+            class="ph-num">[01/04]</span>
+        </div>
+        <div class="pb">// TODO: แถบพลัง 6 อัน</div>
+      </div>
+      <div class="panel">
+        <div class="ph">
+          <div class="ph-icon">◎</div><span class="ph-title">Capability Radar</span>
+        </div>
+        <div class="pb">// TODO: เรดาร์ SVG</div>
+      </div>
+      <div class="panel">
+        <div class="ph">
+          <div class="ph-icon">⏱</div><span class="ph-title">Experience</span>
+        </div>
+        <div class="pb">// TODO: ไทม์ไลน์ + ปุ่มอ่านเพิ่ม</div>
+      </div>
+      <div class="panel">
+        <div class="ph">
+          <div class="ph-icon">🎓</div><span class="ph-title">Education</span>
+        </div>
+        <div class="pb">// TODO: การศึกษา + Capstone</div>
+      </div>
     </div>
 
     <!-- API/QUOTE panel แก้อีกที -->
 
     <!-- BOTTOM GRID: 3 คอลัมน์ -->
     <div class="bottom-grid">
-      <div class="panel"><div class="ph"><div class="ph-icon">✓</div><span class="ph-title">CERTIFICATIONS</span></div><div class="pb">// TODO: ใบรับรอง + badge</div></div>
-      <div class="panel"><div class="ph"><div class="ph-icon">◵</div><span class="ph-title">Getting to Know Me</span></div><div class="pb">// TODO: เกร็ด/LED สถานะ</div></div>
-      <div class="panel"><div class="ph"><div class="ph-icon">⊞</div><span class="ph-title">COMMUNICATION LINK</span></div><div class="pb">// TODO: email/linkedin/github</div></div>
+      <div class="panel">
+        <div class="ph">
+          <div class="ph-icon">✓</div><span class="ph-title">CERTIFICATIONS</span>
+        </div>
+        <div class="pb">// TODO: ใบรับรอง + badge</div>
+      </div>
+      <div class="panel">
+        <div class="ph">
+          <div class="ph-icon">◵</div><span class="ph-title">Getting to Know Me</span>
+        </div>
+        <div class="pb">// TODO: เกร็ด/LED สถานะ</div>
+      </div>
+      <div class="panel">
+        <div class="ph">
+          <div class="ph-icon">⊞</div><span class="ph-title">COMMUNICATION LINK</span>
+        </div>
+        <div class="pb">// TODO: email/linkedin/github</div>
+      </div>
     </div>
 
     <!-- CLOSING QUOTE: กึ่งกลาง ไม่มีกรอบ (fetch มาโชว์ที่นี่) -->
@@ -161,4 +545,5 @@
 
   </div><!-- /wrap -->
 </body>
+
 </html>
